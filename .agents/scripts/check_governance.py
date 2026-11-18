@@ -3,7 +3,7 @@
 """治理自检（v2）：索引覆盖 / 单一权威 / 孤儿文件 / 凭据 / 死引用 / 伪 frontmatter /
 技能元数据 / 结构 / 文档声明。用法：python .agents/scripts/check_governance.py [--strict]
 退出码 0 = 无 BLOCK（--strict 时 WARN 也算失败）；1 = 存在 BLOCK。"""
-import datetime, io, json, os, re, sys
+import datetime, hashlib, io, json, os, re, sys
 
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
 STRICT = "--strict" in sys.argv
@@ -369,6 +369,34 @@ else:
                 gate_text += _f.read()
     if "check_governance.py" not in gate_text:
         add("BLOCK", "HOOK_PARITY", "git-vault 提交路径未调用仓内 checker（双门禁不一致）")
+
+# 15. SKILL_PAYLOAD: 技能自带 payload 必须与仓内文件一致（防漂移）
+PAYLOAD_DIR = os.path.join(ROOT, ".agents/skills/governance-init/assets")
+PAYLOAD_MAN = os.path.join(PAYLOAD_DIR, "MANIFEST.sha256")
+if os.path.isdir(PAYLOAD_DIR):
+    if not os.path.exists(PAYLOAD_MAN):
+        add("BLOCK", "SKILL_PAYLOAD", "assets/MANIFEST.sha256 缺失：运行 python scripts/build_skill_payload.py")
+    else:
+        drift = []
+        for line in read(os.path.join(".agents/skills/governance-init/assets", "MANIFEST.sha256")).splitlines():
+            parts = line.split("  ", 1)
+            if len(parts) != 2:
+                continue
+            want, rel = parts
+            for path in (os.path.join(PAYLOAD_DIR, rel), os.path.join(ROOT, rel)):
+                if not os.path.exists(path):
+                    drift.append(rel + "(missing)")
+                    break
+                h = hashlib.sha256()
+                with io.open(path, "rb") as fh:
+                    for chunk in iter(lambda: fh.read(65536), b""):
+                        h.update(chunk)
+                if h.hexdigest() != want:
+                    drift.append(rel)
+                    break
+        if drift:
+            add("BLOCK", "SKILL_PAYLOAD", "技能 payload 与仓内不一致 %d 个：%s（重跑 build_skill_payload）"
+                % (len(drift), drift[:3]))
 
 blocks = [m for lv, m in issues if lv == "BLOCK" or STRICT]
 for lv, m in issues:

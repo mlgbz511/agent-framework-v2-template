@@ -29,6 +29,7 @@ FILES = [
 STUBS = {
     "docs/governance-map.md": "# 架构与断点\n\nSTATUS: PLACEHOLDER\nPROJECT_TYPE: 未指定（初始化后必须询问用户，不得默认）\n\n> 占位文件：本工作区的层结构、优先级与已知断点待填。安装后按实际项目补全。\n\n## 指令链预算\n- 每链 65536，两链合计 131072（DSH 注入预算）。\n",
     "docs/environment-todo.md": "# 执行台账\n\nSTATUS: PLACEHOLDER\n\n> 占位文件：本工作区环境与治理任务的执行状态待填；首轮事实写到 PROJECT_ENV.md。\n",
+    "docs/audits/evals/status.md": "last_run: 2026-01-01\nE1: 未执行\nE2: 未执行\nE3: 未执行\nrecorded_by: template\n",
 }
 DIRS = [".agents/rules", ".githooks", "docs/audits/evals"]
 SCRIPTS = [

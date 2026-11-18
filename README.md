@@ -1,5 +1,7 @@
 # agent-framework-v2-template
 
+[![version](http<path>/...
+
 > 本仓是 agent-framework-v2 治理框架的公开模板快照；事实源在私有仓，私有历史不进入公开仓。
 
 ## 用途
