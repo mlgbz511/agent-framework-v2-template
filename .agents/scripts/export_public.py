@@ -11,6 +11,7 @@ ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
 
 ALLOW_FILES = [
     "AGENTS.md",
+    "LICENSE",
     ".gitignore",
     ".agents/mcp_config.example.json",
     ".agents/approvals/README.md",
