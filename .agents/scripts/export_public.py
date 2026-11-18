@@ -26,6 +26,8 @@ ALLOW_FILES = [
     ".agents/scripts/skill_curator.py",
     ".agents/skills/governance-init/SKILL.md",
     ".agents/skills/task-modes/SKILL.md",
+    ".agents/skills/init/SKILL.md",
+    ".agents/skills/init-agent/SKILL.md",
     ".githooks/pre-commit",
     ".githooks/commit-msg",
     "scripts/bootstrap_workspace.py",
