@@ -1,0 +1,27 @@
+name: selfcheck
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 3 * * 1'
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+      - name: governance checker
+        run: python .agents/scripts/check_governance.py --strict
+      - name: no machine-specific strings
+        run: |
+          if grep -rlE 'agyWKS|C:[/\\]Users|MLT' .; then
+            echo "machine-specific strings found"
+            exit 1
+          fi
