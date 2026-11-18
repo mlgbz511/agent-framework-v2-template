@@ -1,0 +1,35 @@
+# Git-Vault 治理层纳管：白名单式，默认忽略一切
+*
+!.gitignore
+!AGENTS.md
+!AGENTS.local.md
+!README.md
+!.env.example
+!PROJECT_ENV.md
+!VERSION
+!.agents/
+!.agents/**
+!.agents/mcp_config.example.json
+# 全局草案（T4/T6）：显式放行，保持白名单制
+!.agents/drafts/
+!.agents/drafts/**
+!docs/
+!docs/**
+!scripts/
+!scripts/publish_diagram.py
+!scripts/bootstrap_workspace.py
+!scripts/evals/
+!scripts/evals/**
+# CI 工作流（公开仓导出）
+!.github/
+!.github/**
+# 治理可视化资产（架构图 / 渲染产物）
+!assets/
+!assets/**
+# 明文凭据，永不入库
+.agents/mcp_config.json
+# 规则 06 私有域名补充名单，永不入库
+.agents/rules/*.local.md
+# 提交钩子：白名单放行
+!.githooks/
+!.githooks/**

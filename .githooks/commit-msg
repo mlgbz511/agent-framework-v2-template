@@ -1,0 +1,16 @@
+#!/bin/sh
+# 规则 14 §3：Conventional Commits 子集校验
+msg_file="$1"
+first=$(head -n 1 "$msg_file" 2>/dev/null)
+case "$first" in
+  "Merge "*) exit 0 ;;
+esac
+if ! printf '%s' "$first" | grep -Eq '^(feat|fix|docs|chore|refactor|test|governance|release)(\([a-z0-9-]+\))?: .{4,}'; then
+  echo "commit-msg: 标题须为 type(scope): subject，type ∈ feat|fix|docs|chore|refactor|test|governance|release（规则 14 §3）" >&2
+  exit 1
+fi
+if [ ${#first} -gt 100 ]; then
+  echo "commit-msg: 标题超过 100 字符（规则 14 §3）" >&2
+  exit 1
+fi
+exit 0

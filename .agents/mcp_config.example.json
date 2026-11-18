@@ -1,0 +1,7 @@
+{
+  "_comment": "示例模板。真实 mcp_config.json 含明文凭据，已移出工作区（_quarantine），永不入库。DSH 不直接读取本文件；MCP server 由 profile 插件行注册。",
+  "mcpServers": {
+    "example-stdio": { "command": "<node>", "args": ["<server.js>"], "env": { "API_KEY": "${SERVICE_API_KEY}" } },
+    "example-remote": { "url": "http<path>/..." }
+  }
+}

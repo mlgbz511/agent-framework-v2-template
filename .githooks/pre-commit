@@ -1,0 +1,4 @@
+#!/bin/sh
+# 治理门禁：任何提交前跑 AGENTS.md §7 自检；exit 非 0 即阻断。
+python .agents/scripts/approval_gate.py || exit 1
+python .agents/scripts/check_governance.py --strict || exit 1
