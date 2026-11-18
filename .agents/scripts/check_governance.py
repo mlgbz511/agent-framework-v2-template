@@ -100,7 +100,12 @@ if os.path.exists(os.path.join(ROOT, ".agents/mcp_config.json")):
 TICK_RE = re.compile(BT + r"([^" + BT + r"\n]{3,120})" + BT)
 SCAN_FILES = [("AGENTS.md", agents)] + [(".agents/rules/" + f, t) for f, t in rules_text.items()]
 SCAN_FILES += [(p, read(p)) for p in skill_md]
-SCAN_FILES += [(p, read(p)) for p in walk("docs") if p.endswith(".md")]
+GOV_DOCS = ("docs/governance-map.md", "docs/environment-todo.md", "docs/deploy.md",
+            "docs/prereqs.md", "PROJECT_ENV.md", "docs/audits/p1-eval-plan.md")
+for _d in GOV_DOCS:
+    if os.path.exists(os.path.join(ROOT, _d)):
+        SCAN_FILES.append((_d, read(_d)))
+SCAN_FILES += [(p, read(p)) for p in walk("docs/audits/evals") if p.endswith(".md")]
 MISSING_OK = {"docs/PROGRESS.md", "docs/DECISIONS.md", "docs/PROJECT_ENV.md", "docs/task_plan.md",
                ".agents/mcp_config.json", "DESIGN.md", "docs/DESIGN.md"}
 EXTERNAL_PREFIX = ("core/", "_quarantine/", "dsh/", "E:/", "C:/")

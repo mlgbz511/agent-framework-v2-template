@@ -19,6 +19,27 @@ jobs:
           python-version: '3.x'
       - name: governance checker
         run: python .agents/scripts/check_governance.py --strict
+      - name: credential pattern scan
+        run: |
+          python - <<'PY'
+          import pathlib, re, sys
+          pats = [r"sk-[A-Za-z0-9_\-]{20,}", r"ghp_[A-Za-z0-9]{20,}",
+                  r"glpat-[A-Za-z0-9_\-]{15,}", r"AKIA[0-9A-Z]{16}",
+                  r"-----BEGIN [A-Z ]*PRIVATE KEY-----"]
+          hits = []
+          for p in pathlib.Path(".").rglob("*"):
+              if ".git" in p.parts or not p.is_file():
+                  continue
+              try:
+                  text = p.read_text(errors="replace")
+              except OSError:
+                  continue
+              for pat in pats:
+                  if re.search(pat, text):
+                      hits.append(str(p)); break
+          print("secret_hits=%d" % len(hits))
+          sys.exit(1 if hits else 0)
+          PY
       - name: no machine-specific strings
         run: |
           if grep -rlE 'agyWKS|C:[/\\]Users|MLT' . --exclude-dir=.github; then
