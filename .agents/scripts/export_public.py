@@ -42,11 +42,10 @@ STUBS = {
     "PROJECT_ENV.md": "# PROJECT_ENV — 环境事实\n\n> 模板：安装后由 bootstrap 自动探测，或手工填写。\n\n## 自动探测\n- 仓库根：未知（待填）\n- Python：未知（待填）\n\n## 人工确认（待填）\n- 端口与本地服务：未知（待填）\n- 服务端点与代理：未知（待填）\n- 写入限制/ACL 怪癖：未知（待填）\n- 凭据边界：未知（待填）\n",
     "docs/audits/evals/status.md": "last_run: 2026-01-01\nE1: 未执行\nE2: 未执行\nE3: 未执行\nrecorded_by: template\n",
 }
-PATH_PAT = r"[A-Za-z]:\\\\[^\s\x60'\"<>]+"
+PATH_PAT = r"(?<![A-Za-z0-9_])[A-Za-z]:[\\/](?![\\/])[^\s\x60'\"<>]+"
 SCRUB = [
     (re.compile(PATH_PAT), "<path>/..."),
-    (re.compile(r"[A-Za-z]:/[^\s\x60'\"<>]+"), "<path>/..."),
-    (re.compile(r"<path>/..."), "%USERPROFILE%"),
+    (re.compile(r"C:[\\/]+Users[\\/]+[A-Za-z0-9_]+"), "%USERPROFILE%"),
     (re.compile(r"<owner>"), "<owner>"),
     (re.compile(r"<owner>"), "<owner>"),
 ]

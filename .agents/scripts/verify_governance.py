@@ -88,11 +88,11 @@ def main():
         add("FAIL" if args.require_external else "WARN",
             "缺 cc-safety-net 用户策略：%s（裸 git 不会被拦）" % cc)
     try:
-        urllib.request.urlopen("htt<path>/...", timeout=2)
+        urllib.request.urlopen("http://127.0.0.1:8765/api/status", timeout=2)
         add("OK", "git-vault 网关可达")
     except Exception:
         add("FAIL" if args.require_external else "WARN",
-            "git-vault 网关不可达（htt<path>/...")
+            "git-vault 网关不可达（http://127.0.0.1:8765/api/status；提交通道未就绪）")
 
     for rel in ("docs/governance-map.md", "docs/environment-todo.md"):
         path = os.path.join(t, rel)
@@ -106,7 +106,7 @@ def main():
 
     remedies = [
         ("cc-safety-net", "安装/配置拦截器：策略文件应在 ~/.cc-safety-net/rules/rule.json；见 docs/prereqs.md"),
-        ("git-vault", "启动网关：<path>/... htt<path>/... 返回 200；见 docs/prereqs.md"),
+        ("git-vault", "启动网关：<path>/... http://127.0.0.1:8765/api/status 返回 200；见 docs/prereqs.md"),
         ("PROJECT_ENV", "补 PROJECT_ENV.md 的未知项，或重跑 bootstrap 让其重新探测"),
         ("占位未填", "补 docs/governance-map.md 与 docs/environment-todo.md，或重跑 bootstrap --force"),
         ("备份目录", "把备份移到父目录：--clean 默认已外置；已有备份可手工 mv 或 --purge-backups"),

@@ -1,6 +1,6 @@
 # 治理栈部署手册（本仓为唯一源）
 
-> 外部模板 `D:\Downloads\AGENTmd` 已废弃：只作历史归档，不再作为部署来源。部署一律"克隆/拉取本仓 → bootstrap → verify"。
+> 外部模板 `<path>/...` 已废弃：只作历史归档，不再作为部署来源。部署一律"克隆/拉取本仓 → bootstrap → verify"。
 
 ## 前置
 
@@ -15,7 +15,7 @@
 ## 覆盖式部署（保留目标仓业务文件）
 
 ```bash
-git clone http<path>/... .gov-src
+git clone https://github.com/<owner>/agent-framework-v2.git .gov-src
 python .gov-src/scripts/bootstrap_workspace.py --target <目标目录>            # dry-run
 python .gov-src/scripts/bootstrap_workspace.py --target <目标目录> --apply
 .agents/scripts/verify_governance.py --target <目标目录>

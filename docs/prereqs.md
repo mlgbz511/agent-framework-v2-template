@@ -17,7 +17,7 @@
 
 ## 3. git-vault（提交与凭据通道）
 
-- 检查：`curl -s htt<path>/...`
+- 检查：`curl -s http://127.0.0.1:8765/api/status`
 - 期望：200 JSON
 - 修复：启动 `<path>/...` 的 server；仓库需登记在 git-vault 工具仓的 config 目录（managed_repos.json，不在本仓）
 - verify 显示：`git-vault 网关不可达`
@@ -31,8 +31,8 @@
 
 ## 5. 网络与代理
 
-- 检查：`curl -sS --max-time 5 http<path>/...`
-- 期望：可达；不稳时经 `http.proxy=htt<path>/...`
+- 检查：`curl -sS --max-time 5 https://gitlab.com`
+- 期望：可达；不稳时经 `http.proxy=http://127.0.0.1:11455`
 - 注意：直连与代理都会抖动，推送前先 `git ls-remote`
 
 ## 6. 验证入口

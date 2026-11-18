@@ -22,7 +22,7 @@ description: 用本仓治理栈初始化一个工作区（AGENTS.md、rules 01-1
 - **覆盖式**（默认）：保留目标仓已有同名文件，需要更新时加 `--force`。
 - **清装式**（`--clean`）：先把 `AGENTS.md`/`.agents/`/`.githooks/` 备份到 `.agents.bak-<ts>/` 再移除，然后全新部署；业务文件不动。破坏性操作，必须先 dry-run 给用户看清单。
 
-部署来源只认本仓（clone/pull），不要再用 `D:\Downloads\AGENTmd` 旧模板。部署手册见 `docs/deploy.md`。
+部署来源只认本仓（clone/pull），不要再用 `<path>/...` 旧模板。部署手册见 `docs/deploy.md`。
 
 ## 步骤
 

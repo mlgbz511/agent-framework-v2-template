@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 publish_diagram.py - 架构工程图云端安全发布器
-连接 Cloudflare Access 保护的图管理中心 Worker (http<path>/...
+连接 Cloudflare Access 保护的图管理中心 Worker (https://adm-k7e2b1.28870721.xyz/api/publish)
 将本地 Archify / TopoFlow 生成的 HTML 交互式图纸发布到 R2，并获取 CDN 嵌入直链。
 """
 

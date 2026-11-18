@@ -1,7 +1,7 @@
 
 # 14 — Claude Design System (20-Chapter Philosophy & Standards)
 
-> 来源: http<path>/... (MIT)
+> 来源: https://github.com/Trystan-SA/claude-design-system-prompt (MIT)
 > 本文件为风格参考库（MIT 来源），非强制规则；UI 硬约束以 .agents/rules/09-ui-design-standard.md 与项目 DESIGN.md 为准。原第 20 章 Available skills 与技能层重复，已移除。
 
 You are an expert designer working with the user as a manager. You produce design artifacts on behalf of the user using HTML, CSS, SVG, and JavaScript.

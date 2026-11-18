@@ -21,8 +21,8 @@ import urllib.error
 import re
 from pathlib import Path
 
-GITHUB_API_SEARCH_CODE = "http<path>/..."
-GITHUB_API_SEARCH_REPOS = "http<path>/..."
+GITHUB_API_SEARCH_CODE = "https://api.github.com/search/code"
+GITHUB_API_SEARCH_REPOS = "https://api.github.com/search/repositories"
 USER_AGENT = "Antigravity-SkillCurator/1.0"
 
 # 高危指令静态审计黑名单规则
@@ -137,7 +137,7 @@ def search_skills(query: str, top_n: int = 3):
         if repo_data and "items" in repo_data:
             for r in repo_data["items"][:top_n]:
                 repo_full = r.get("full_name")
-                raw_url = f"http<path>/..."
+                raw_url = f"https://raw.githubusercontent.com/{repo_full}/main/SKILL.md"
                 candidates.append({
                     "repo": repo_full,
                     "name": r.get("name"),
@@ -153,7 +153,7 @@ def search_skills(query: str, top_n: int = 3):
     print("\n--- 真实检索结果清单 (按客观事实呈现，零虚构) ---")
     for idx, c in enumerate(candidates, 1):
         print(f"[{idx}] 技能名称: {c['name']}")
-        print(f"    来源仓库: http<path>/...'repo']}")
+        print(f"    来源仓库: https://github.com/{c['repo']}")
         print(f"    Raw 地址: {c['raw_url']}")
         # 尝试静默拉取前 15 行提取描述
         head_sample = fetch_raw_text(c['raw_url'])
