@@ -20,7 +20,9 @@
 !scripts/bootstrap_workspace.py
 !scripts/build_skill_payload.py
 !scripts/install_skill_global.py
+!scripts/package_skill.py
 !LICENSE
+!governance-init-skills.tar.gz
 !scripts/evals/
 !scripts/evals/**
 # CI 工作流（公开仓导出）

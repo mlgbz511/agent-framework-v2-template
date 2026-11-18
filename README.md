@@ -8,6 +8,24 @@
 
 把一个工作区初始化为受治理的 agent workspace：AGENTS.md 指令链、rules 01-14、checker 静态门禁、审批收据、提交钩子、governance-init 技能。
 
+## 三种获取方式
+
+| 方式 | 适合 | 命令 |
+|---|---|---|
+| 技能包（推荐） | 只想装全局技能 | 见下方"仅安装技能" |
+| 克隆本仓 | 要在本仓里跑/改脚本 | `git clone` 后 bootstrap |
+| 直接 bootstrap | 已有一份副本 | `python scripts/bootstrap_workspace.py --target . --apply` |
+
+### 仅安装技能（任意 agent 主机）
+
+```bash
+curl -LO https://raw.githubusercontent.com/mlgbz511/agent-framework-v2-template/main/governance-init-skills.tar.gz
+tar xzf governance-init-skills-*.tar.gz -C ~/.dsh/skills/
+# Gemini / Antigravity 主机改为 -C ~/.gemini/config/skills/
+```
+
+包内含 `governance-init`（带 assets payload）与 `init`/`init-agent` 兼容别名。
+
 ## 快速开始
 
     git clone https://github.com/mlgbz511/agent-framework-v2-template.git
