@@ -104,6 +104,13 @@ def main():
             fh.write(text)
         log.append("STUB " + rel)
 
+    selfcheck_src = os.path.join(ROOT, ".agents/templates/public-selfcheck.yml")
+    if os.path.exists(selfcheck_src):
+        dst = os.path.join(out, ".github/workflows/selfcheck.yml")
+        os.makedirs(os.path.dirname(dst), exist_ok=True)
+        shutil.copy2(selfcheck_src, dst)
+        log.append("COPY .github/workflows/selfcheck.yml")
+
     readme_src = os.path.join(ROOT, ".agents/templates/public-readme.md")
     if os.path.exists(readme_src):
         shutil.copy2(readme_src, os.path.join(out, "README.md"))
