@@ -46,8 +46,6 @@ PATH_PAT = r"(?<![A-Za-z0-9_])[A-Za-z]:[\\/](?![\\/])[^\s\x60'\"<>]+"
 SCRUB = [
     (re.compile(PATH_PAT), "<path>/..."),
     (re.compile(r"C:[\\/]+Users[\\/]+[A-Za-z0-9_]+"), "%USERPROFILE%"),
-    (re.compile(r"<owner>"), "<owner>"),
-    (re.compile(r"<owner>"), "<owner>"),
 ]
 
 

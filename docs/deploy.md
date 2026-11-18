@@ -15,7 +15,7 @@
 ## 覆盖式部署（保留目标仓业务文件）
 
 ```bash
-git clone https://github.com/<owner>/agent-framework-v2.git .gov-src
+git clone https://github.com/mlgbz511/agent-framework-v2.git .gov-src
 python .gov-src/scripts/bootstrap_workspace.py --target <目标目录>            # dry-run
 python .gov-src/scripts/bootstrap_workspace.py --target <目标目录> --apply
 .agents/scripts/verify_governance.py --target <目标目录>

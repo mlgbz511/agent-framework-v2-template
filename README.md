@@ -1,6 +1,6 @@
 # agent-framework-v2-template
 
-[![version](https://img.shields.io/github/v/tag/<owner>/agent-framework-v2-template?label=version)](https://github.com/<owner>/agent-framework-v2-template/tags)
+[![version](https://img.shields.io/github/v/tag/mlgbz511/agent-framework-v2-template?label=version)](https://github.com/mlgbz511/agent-framework-v2-template/tags)
 
 > 本仓是 agent-framework-v2 治理框架的公开模板快照；事实源在私有仓，私有历史不进入公开仓。
 
@@ -10,7 +10,7 @@
 
 ## 快速开始
 
-    git clone https://github.com/<owner>/agent-framework-v2-template.git
+    git clone https://github.com/mlgbz511/agent-framework-v2-template.git
     python agent-framework-v2-template/scripts/bootstrap_workspace.py --target <你的目录>          # dry-run
     python agent-framework-v2-template/scripts/bootstrap_workspace.py --target <你的目录> --apply
     python agent-framework-v2-template/.agents/scripts/verify_governance.py --target <你的目录> --require-external --print-remedies
