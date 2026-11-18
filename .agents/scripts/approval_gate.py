@@ -80,7 +80,7 @@ def main() -> int:
     for path in deleted:
         if under(path, PROTECTED):
             required.setdefault("deletion", []).append(path)
-    if len(deleted) >= 3:
+    if len(deleted) >= 2:
         required.setdefault("deletion", []).extend(deleted)
     for status, path, _ in staged:
         if status.startswith(("A", "D")) or not os.path.exists(path):
