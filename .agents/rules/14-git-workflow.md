@@ -13,8 +13,19 @@ version: 1
 
 - 提交、推送、分支、合并、标签、回退**只经 git-vault MCP 工具**：vault_commit_push、vault_git_status、vault_git_branch、vault_git_merge。
 - 只读 git（status、diff、log、show、blame）可直接使用，不经网关。
-- 无 git-vault 的环境（网关未启动、工具未挂载）视为降级：先报告缺口、在 docs/environment-todo.md 记录 T 条目、取得用户明确批准后，才允许裸 git 写操作，并在交付说明中标注。
+- 无 git-vault 的环境不自动降级：先探测 `/api/status`。离线时只有两条路——运行 `/init-gitvault` 安装，或按 §1.1 显式备案；不得静默改用裸 git。
 - 裸写由 cc-safety-net rulebook 拦截；拦截失效也要按本规则执行，不得把"没拦住"当作许可。
+
+### 1.1 备案例外（唯一合法降级）
+
+仅当以下全部成立时，本机 git 写操作才合法：
+
+1. `.agents/git-mode.json` 的 `mode` 为 `registered-exception`；
+2. `receipt` 指向的收据存在、`category: gate-change`、含 `approver: user`；
+3. `expires_at` 未过期（默认 30 天）；
+4. 探测到 git-vault 不在线。
+
+任一条不成立即回到 §1：禁止裸写。checker 的 `GIT_MODE` 检查负责执行本例外，vault 在线时备案态直接 BLOCK。备案续期须重新取得用户批准并更新 `expires_at`。
 
 ## 2. 分支模型
 

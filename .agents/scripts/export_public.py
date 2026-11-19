@@ -28,6 +28,8 @@ ALLOW_FILES = [
     ".agents/skills/task-modes/SKILL.md",
     ".agents/skills/init/SKILL.md",
     ".agents/skills/init-agent/SKILL.md",
+    ".agents/skills/init-gitvault/SKILL.md",
+    "scripts/fetch_vault.py",
     ".githooks/pre-commit",
     ".githooks/commit-msg",
     "scripts/bootstrap_workspace.py",

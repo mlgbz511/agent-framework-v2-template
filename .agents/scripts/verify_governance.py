@@ -61,6 +61,34 @@ def main():
         hp = (res.stdout or "").strip()
         add("OK" if hp == ".githooks" else "FAIL", "core.hooksPath=%s" % (hp or "未设置"))
 
+    gm_path = os.path.join(t, ".agents", "git-mode.json")
+    if os.path.exists(gm_path):
+        try:
+            gm = json.loads(read(gm_path))
+        except Exception as exc:
+            add("FAIL", "git-mode.json 无法解析：%s" % exc)
+            gm = {}
+        gmode = gm.get("mode", "unset")
+        online = False
+        try:
+            import urllib.request as _u
+            _url = os.environ.get("GIT_VAULT_API", "http://127.0.0.1:8765") + "/api/status"
+            with _u.urlopen(_url, timeout=1.5) as _r:
+                online = 200 <= getattr(_r, "status", 0) < 300
+        except Exception:
+            online = False
+        if gmode == "registered-exception":
+            if online:
+                add("FAIL", "git-mode=registered-exception 但 vault 在线（应切回 vault）")
+            else:
+                add("OK", "git-mode=registered-exception（备案，已知缺口）")
+        elif gmode == "vault":
+            add("OK" if online else "WARN", "git-mode=vault，vault=%s" % ("online" if online else "missing"))
+        else:
+            add("WARN", "git-mode=%s" % gmode)
+    else:
+        add("WARN", "缺 .agents/git-mode.json（重跑 bootstrap）")
+
     for rel in (".agents/approvals/README.md", "docs/audits/evals/status.md", "PROJECT_ENV.md"):
         add("OK" if os.path.exists(os.path.join(t, rel)) else "WARN", rel)
 

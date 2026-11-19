@@ -107,6 +107,7 @@ for _d in GOV_DOCS:
         SCAN_FILES.append((_d, read(_d)))
 SCAN_FILES += [(p, read(p)) for p in walk("docs/audits/evals") if p.endswith(".md")]
 MISSING_OK = {"docs/PROGRESS.md", "docs/DECISIONS.md", "docs/PROJECT_ENV.md", "docs/task_plan.md",
+               ".agents/git-mode.json",
                ".agents/mcp_config.json", "DESIGN.md", "docs/DESIGN.md"}
 EXTERNAL_PREFIX = ("core/", "_quarantine/", "dsh/", "E:/", "C:/")
 seen_refs = set()
@@ -355,6 +356,45 @@ else:
                 add("WARN", "EVAL_STATUS", "评测记录超过 180 天未更新（last_run=%s）" % eval_fields["last_run"])
         except ValueError:
             add("BLOCK", "EVAL_STATUS", "status.md 的 last_run 非 ISO 日期：%s" % eval_fields["last_run"])
+
+# 12b. GIT_MODE: 唯一写入口模式；备案态要求收据、期限，且 vault 在线时禁止使用
+def _vault_online(timeout=1.5):
+    import urllib.request
+    try:
+        url = os.environ.get("GIT_VAULT_API", "http://127.0.0.1:8765") + "/api/status"
+        with urllib.request.urlopen(url, timeout=timeout) as resp:
+            return 200 <= getattr(resp, "status", 0) < 300
+    except Exception:
+        return False
+
+GM_PATH = os.path.join(ROOT, ".agents/git-mode.json")
+if os.path.exists(GM_PATH):
+    try:
+        gm = json.load(io.open(GM_PATH, "r", encoding="utf-8"))
+    except Exception as e:
+        add("BLOCK", "GIT_MODE", "git-mode.json 无法解析：%s" % e)
+        gm = {}
+    gmode = gm.get("mode")
+    if gmode == "registered-exception":
+        if _vault_online():
+            add("BLOCK", "GIT_MODE", "vault 在线却处于 registered-exception：执行 init --git-mode vault")
+        rec = gm.get("receipt") or ""
+        if not rec or not os.path.exists(os.path.join(ROOT, rec)):
+            add("BLOCK", "GIT_MODE", "备案缺收据：%s" % (rec or "(空)"))
+        expires = gm.get("expires_at") or ""
+        if expires:
+            try:
+                if datetime.date.today() > datetime.datetime.strptime(expires, "%Y-%m-%d").date():
+                    add("BLOCK", "GIT_MODE", "备案已过期（%s）：复核或安装 vault" % expires)
+            except ValueError:
+                add("BLOCK", "GIT_MODE", "备案 expires_at 非法：%s" % expires)
+    elif gmode == "vault":
+        if not _vault_online():
+            add("WARN", "GIT_MODE", "vault 离线：提交将失败；或按规则 14 §1.1 备案")
+    elif gmode == "vault-missing":
+        add("WARN", "GIT_MODE", "未安装 vault：运行 /init-gitvault，或按规则 14 §1.1 备案")
+    elif gmode:
+        add("WARN", "GIT_MODE", "未知 mode=%s" % gmode)
 
 # 13. HOOK_PARITY: 网关提交路径必须调用仓内 checker
 ENGINE = os.environ.get("GIT_VAULT_ENGINE", "<path>/...")

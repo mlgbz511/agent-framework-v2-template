@@ -72,3 +72,15 @@ python .agents/scripts/check_governance.py --strict      # exit 0
 echo "<!-- probe -->" >> .agents/rules/06-domain-whitelist.md
 git add -A && sh .githooks/pre-commit; echo exit=$?      # 期望 1
 ```
+
+## 写入口模式（git-mode）
+
+`bootstrap` 启动时探测 `http://127.0.0.1:8765/api/status`，并把结果写入目标仓 `.agents/git-mode.json`：
+
+| 场景 | 命令 | 结果 |
+|---|---|---|
+| vault 在线 | `init`（默认 auto） | `mode=vault` |
+| 未安装，选择安装 | `/init-gitvault` 后重跑 `init` | `mode=vault` |
+| 未安装，拒绝安装 | `init --git-mode local --reason "<原因>"` | `mode=registered-exception` + 收据，30 天有效 |
+
+规则：vault 在线时禁止 `--git-mode local`（防绕过门禁）；备案过期或收据缺失由 checker `GIT_MODE` 拦截。详见规则 14 §1.1。

@@ -26,6 +26,8 @@ description: 用本仓治理栈初始化一个工作区（AGENTS.md、rules 01-1
 
 ## 步骤
 
+0. **探测写入口（必做）**：`curl -s http://127.0.0.1:8765/api/status`（或 `python scripts/fetch_vault.py --check`）。在线则继续；离线时明确告知两条路——运行 `/init-gitvault` 安装（推荐），或 `--git-mode local --reason "<原因>"` 备案。bootstrap 会把结果写入目标仓 `.agents/git-mode.json`；不得静默选择裸 git。
+
 1. 先 dry-run，把将创建/跳过/覆盖的文件列给用户：
    ```bash
    python .agents/scripts/bootstrap_workspace.py --target <目标目录>

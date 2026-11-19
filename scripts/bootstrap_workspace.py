@@ -5,6 +5,7 @@ Default is dry-run; pass --apply to write. Existing files are kept unless --forc
 """
 import argparse
 import filecmp
+import json
 import os
 import platform
 import re
@@ -25,6 +26,7 @@ FILES = [
     "docs/design/claude-design-system.md",
     "scripts/publish_diagram.py",
     "scripts/bootstrap_workspace.py",
+    ".agents/templates/git-mode.json",
 ]
 STUBS = {
     "docs/governance-map.md": "# 架构与断点\n\nSTATUS: PLACEHOLDER\nPROJECT_TYPE: 未指定（初始化后必须询问用户，不得默认）\n\n> 占位文件：本工作区的层结构、优先级与已知断点待填。安装后按实际项目补全。\n\n## 指令链预算\n- 每链 65536，两链合计 131072（DSH 注入预算）。\n",
@@ -237,6 +239,72 @@ def apply(target, rel, force):
     return 1
 
 
+
+def vault_online(timeout=2.0):
+    import urllib.request
+    try:
+        url = os.environ.get("GIT_VAULT_API", "http://127.0.0.1:8765") + "/api/status"
+        with urllib.request.urlopen(url, timeout=timeout) as resp:
+            return 200 <= getattr(resp, "status", 0) < 300
+    except Exception:
+        return False
+
+
+def resolve_git_mode(args, target):
+    """返回 (mode, reason) 或 (None, 错误信息)。"""
+    online = vault_online()
+    mode = args.git_mode
+    reason = args.reason or ""
+    if mode == "auto":
+        if online:
+            return "vault", "vault 在线（自动探测）"
+        return None, ("vault 未在线。两条路：\n"
+                      "  1) 运行 /init-gitvault 安装（推荐）\n"
+                      "  2) 不安装并备案：--git-mode local --reason \"<原因>\"（30 天有效）")
+    if mode == "vault":
+        if not online:
+            return None, "指定 --git-mode vault，但 /api/status 不可达"
+        return "vault", reason or "vault 在线"
+    if mode == "local":
+        if online:
+            return None, "vault 在线时禁止降级为 local（防绕过门禁）；改用 --git-mode vault"
+        if not reason:
+            return None, "--git-mode local 必须同时给 --reason"
+        return "registered-exception", reason
+    return None, "未知 --git-mode: %s" % mode
+
+
+def write_git_mode(target, mode, reason):
+    path = os.path.join(target, ".agents", "git-mode.json")
+    os.makedirs(os.path.dirname(path), exist_ok=True)
+    today = time.strftime("%Y-%m-%d")
+    expires = None
+    receipt = None
+    if mode == "registered-exception":
+        expires = time.strftime("%Y-%m-%d", time.localtime(time.time() + 30 * 86400))
+        receipt = ".agents/approvals/%s-no-vault-exception.md" % today
+        rpath = os.path.join(target, receipt)
+        with open(rpath, "w", encoding="utf-8", newline="\n") as fh:
+            fh.write("category: gate-change\n"
+                     "targets: git-write-path\n"
+                     "impact: 本工作区无 git-vault 写入口，按规则 14 §1.1 允许本机 git\n"
+                     "rollback: init --git-mode vault（vault 在线时）或删除 git-mode.json\n"
+                     "approver: user\n"
+                     "date: %s\nexpires_at: %s\n" % (today, expires))
+    data = {
+        "mode": mode,
+        "reason": reason,
+        "decided_by": "user",
+        "decided_at": time.strftime("%Y-%m-%dT%H:%M:%S"),
+        "expires_at": expires,
+        "receipt": receipt,
+    }
+    with open(path, "w", encoding="utf-8", newline="\n") as fh:
+        json.dump(data, fh, ensure_ascii=False, indent=2)
+        fh.write("\n")
+    return path
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--target", required=True)
@@ -252,6 +320,9 @@ def main():
                     help="备份放入目标仓（默认放父目录 .gov-backups，避免被提交）")
     ap.add_argument("--purge-backups", type=int, metavar="DAYS",
                     help="清理父目录 .gov-backups 中超过 DAYS 天的备份；加 --apply 才真删")
+    ap.add_argument("--git-mode", choices=("auto", "vault", "local"), default="auto",
+                    help="auto=探测后自动选 vault；local=未装 vault 时显式备案（需 --reason）")
+    ap.add_argument("--reason", default="", help="--git-mode local 的备案原因")
     args = ap.parse_args()
 
     global ROOT
@@ -275,6 +346,12 @@ def main():
     except OSError as exc:
         print("目标目录不可写，拒绝在半途失败：%s" % exc)
         return 2
+
+    mode, mode_msg = resolve_git_mode(args, target)
+    if mode is None:
+        print("GIT-MODE       拒绝：%s" % mode_msg)
+        return 3
+    print("GIT-MODE       %s（%s）" % (mode, mode_msg))
 
     if args.purge_backups is not None:
         purge_backups(target, args.purge_backups, args.apply)
@@ -314,6 +391,8 @@ def main():
         print("CREATE         PROJECT_ENV.md（自动探测）")
     else:
         print("KEEP           PROJECT_ENV.md（已存在，不覆盖）")
+    gmpath = write_git_mode(target, mode, mode_msg)
+    print("GIT-MODE       写入 %s" % os.path.relpath(gmpath, target).replace(os.sep, "/"))
 
     for rel, text in STUBS.items():
         dst = os.path.join(target, rel)
