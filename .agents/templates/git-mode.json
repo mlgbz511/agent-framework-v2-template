@@ -1,0 +1,8 @@
+{
+  "mode": "vault",
+  "reason": "模板：bootstrap 会按主机实况重新写入",
+  "decided_by": "user",
+  "decided_at": "2026-01-01T00:00:00",
+  "expires_at": null,
+  "receipt": null
+}

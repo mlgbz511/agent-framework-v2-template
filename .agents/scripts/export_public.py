@@ -17,6 +17,7 @@ ALLOW_FILES = [
     ".agents/approvals/README.md",
     ".agents/templates/PROJECT_ENV.template.md",
     ".agents/templates/task_plan_template.md",
+    ".agents/templates/git-mode.json",
     ".agents/scripts/check_governance.py",
     ".agents/scripts/approval_gate.py",
     ".agents/scripts/verify_governance.py",
