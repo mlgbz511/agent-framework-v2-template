@@ -21,6 +21,7 @@
 !scripts/build_skill_payload.py
 !scripts/install_skill_global.py
 !scripts/package_skill.py
+!scripts/fetch_vault.py
 !LICENSE
 !governance-init-skills.tar.gz
 !scripts/evals/
