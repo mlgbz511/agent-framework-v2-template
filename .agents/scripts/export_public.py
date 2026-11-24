@@ -25,6 +25,7 @@ ALLOW_FILES = [
     ".agents/scripts/requirements.txt",
     ".agents/scripts/gitingest_tool.py",
     ".agents/scripts/skill_curator.py",
+    ".agents/scripts/probe_confined.py",
     ".agents/skills/governance-init/SKILL.md",
     ".agents/skills/task-modes/SKILL.md",
     ".agents/skills/init/SKILL.md",

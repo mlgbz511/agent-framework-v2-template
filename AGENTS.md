@@ -46,17 +46,7 @@
 
 不要机械套表。简单问题直接回答；只加载当前任务需要的专项规则。若环境不支持所需工具，说明限制并给出可行替代。
 
-双 Agent 协同短码（由本窗口与对方窗口各承担一角；加 `-r` 互换角色；`#co` 出选单等数字）：
-
-| 短码 | 模式 | 本窗口 | 对方窗口 |
-|---|---|---|---|
-| `#mc` | MAKER-CHECKER | CODER | AUDITOR |
-| `#ae` | ARCH-EDITOR | ARCHITECT | EDITOR |
-| `#tdd` | TDD | TESTER | IMPLEMENTER |
-| `#ss` | SCOUT-STRIKER | SCOUT | STRIKER |
-| `#fix` | DIAGNOSE | STUCK | DIAGNOSTICIAN |
-
-短码只在环境实际提供 Agent HUD 会话互发能力时有效；细则与交接模板见 `.agents/rules/15-dual-agent-coop.md`。
+双 Agent 协同短码：`#mc` `#ae` `#tdd` `#ss` `#fix`（加 `-r` 互换角色），`#co` 出选单等数字。角色分工、写锁与交接模板见 `.agents/rules/15-dual-agent-coop.md`；仅在环境实际提供 Agent HUD 会话互发能力时有效。
 
 ## 3. 通用执行闭环
 

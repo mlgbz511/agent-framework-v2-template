@@ -50,7 +50,15 @@ def main():
 
     rules_dir = os.path.join(t, ".agents", "rules")
     rules = sorted(f for f in os.listdir(rules_dir) if f.endswith(".md")) if os.path.isdir(rules_dir) else []
-    add("OK" if len(rules) >= 14 else "FAIL", "rules 数量=%d（应≥14）" % len(rules))
+    man = os.path.join(t, ".agents/skills/governance-init/assets/MANIFEST.sha256")
+    expected = 0
+    if os.path.exists(man):
+        expected = sum(1 for ln in read(man).splitlines() if "  .agents/rules/" in ln)
+    if expected:
+        add("OK" if len(rules) >= expected else "FAIL",
+            "rules 数量=%d（应≥%d，按 payload MANIFEST）" % (len(rules), expected))
+    else:
+        add("OK" if len(rules) >= 14 else "FAIL", "rules 数量=%d（应≥14，未找到 MANIFEST）" % len(rules))
     missing_meta = [f for f in rules if not read(os.path.join(rules_dir, f)).lstrip("\ufeff").startswith("---")]
     if missing_meta:
         add("FAIL", "缺 frontmatter：%s" % ",".join(missing_meta[:4]))
