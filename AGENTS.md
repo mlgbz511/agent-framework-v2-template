@@ -95,6 +95,7 @@
 - 环境与治理执行台账：`docs/environment-todo.md`（读当：查环境/治理任务执行状态）
 - 上游工单草案（非治理内容，仅归档）：`docs/plans/`（读当：查上游工单草案）
 - 架构图发布脚本：`scripts/publish_diagram.py`（读当：发布架构图）
+- 白皮书构建脚本：`scripts/build_whitepaper.py`（读当：重建架构白皮书）
 - 工作区初始化与治理校验：`scripts/bootstrap_workspace.py`、`.agents/scripts/verify_governance.py`（读当：新工作区部署治理栈/核对门禁是否真的生效）；技能 `governance-init` 是其触发入口
 - 项目环境事实（命令/端口/路径/已知坑/边界）：`PROJECT_ENV.md`（读当：进入工作区首轮或需要实际命令与端口时）
 - 审批收据与评测证据：`.agents/approvals/`、`docs/audits/evals/`（读当：提交删除/依赖/受保护路径改动前，或需要评测状态）

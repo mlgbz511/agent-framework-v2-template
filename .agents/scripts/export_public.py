@@ -36,6 +36,7 @@ ALLOW_FILES = [
     ".githooks/commit-msg",
     "scripts/bootstrap_workspace.py",
     "scripts/publish_diagram.py",
+    "scripts/build_whitepaper.py",
     "docs/deploy.md",
     "docs/prereqs.md",
     "docs/design/claude-design-system.md",
