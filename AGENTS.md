@@ -46,6 +46,18 @@
 
 不要机械套表。简单问题直接回答；只加载当前任务需要的专项规则。若环境不支持所需工具，说明限制并给出可行替代。
 
+双 Agent 协同短码（由本窗口与对方窗口各承担一角；加 `-r` 互换角色；`#co` 出选单等数字）：
+
+| 短码 | 模式 | 本窗口 | 对方窗口 |
+|---|---|---|---|
+| `#mc` | MAKER-CHECKER | CODER | AUDITOR |
+| `#ae` | ARCH-EDITOR | ARCHITECT | EDITOR |
+| `#tdd` | TDD | TESTER | IMPLEMENTER |
+| `#ss` | SCOUT-STRIKER | SCOUT | STRIKER |
+| `#fix` | DIAGNOSE | STUCK | DIAGNOSTICIAN |
+
+短码只在环境实际提供 Agent HUD 会话互发能力时有效；细则与交接模板见 `.agents/rules/15-dual-agent-coop.md`。
+
 ## 3. 通用执行闭环
 
 0. **画像与建制（工作区冷启动）**：在新工作区或开启长期项目时，识别项目类型（软件、小说创作、学术调研、办公写作等），区分临时任务与长期项目；检查现有规则、可用能力与缺口；仅在有实质价值时推荐初始化规则或按 `13` 适配 Skill，严禁将一次性任务升级为过度建制。
@@ -84,6 +96,7 @@
 - 项目环境文档生命周期管理（持续管理环境信息的软件/工程项目）：`.agents/rules/12-project-environment-policy.md`（读当：增改 PROJECT_ENV 或环境事实）
 - 全场景技能发现、能力评估与生命周期管理：`.agents/rules/13-skill-lifecycle-and-adaptation.md`（读当：发现能力缺口/检索安装技能）
 - Git 工作流与唯一写入口（提交/推送/分支/合并/标签）：`.agents/rules/14-git-workflow.md`（读当：任何 git 提交/推送/分支/合并/标签）
+- 双 Agent 协同（模式矩阵、令牌环写锁、HUD 交接模板）：`.agents/rules/15-dual-agent-coop.md`（读当：收到 #mc/#ae/#tdd/#ss/#fix/#co 短码或要求双 Agent 协作）
 - 高保真视觉风格参考库（非强制规则；UI 硬约束以规则 09 与项目 DESIGN.md 为准）：`docs/design/claude-design-system.md`（读当：需要高保真视觉参考）
 - 大改动计划模板（由规则 02 引用）：`.agents/templates/task_plan_template.md`（读当：按规则 02 写大改动计划）
 - 治理自检脚本（见 §7）：`.agents/scripts/check_governance.py`；辅助脚本 `.agents/scripts/skill_curator.py`（技能检索安装）、`.agents/scripts/gitingest_tool.py`（仓库摘要，需 `pip install -r .agents/scripts/requirements.txt`）（读当：改 .agents/ 或本文件后自检/检索安装技能/生成摘要）

@@ -1,6 +1,6 @@
 ---
 name: governance-init
-description: 用本仓治理栈初始化一个工作区（AGENTS.md、rules 01-14、checker、审批收据门禁、评测状态），装完自动验证 hooks 与 checker 是否真正生效。触发词：/governance-init、初始化治理、部署治理框架、给工作区装 agent 规则。若目标工作区已有旧版 init-agent 产物，以本仓为准并报告差异。
+description: 用本仓治理栈初始化一个工作区（AGENTS.md、rules 01-15、checker、审批收据门禁、评测状态），装完自动验证 hooks 与 checker 是否真正生效。触发词：/governance-init、初始化治理、部署治理框架、给工作区装 agent 规则。若目标工作区已有旧版 init-agent 产物，以本仓为准并报告差异。
 ---
 
 # governance-init
