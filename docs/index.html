@@ -884,7 +884,7 @@
   <header class="masthead">
     <div class="masthead-left">
       <span class="masthead-brand">agent-framework-v2</span>
-      <span class="masthead-rev">rev 4e5da27</span>
+      <span class="masthead-rev">rev ddc34e8</span>
     </div>
     <div class="masthead-actions">
       <button class="btn-ghost" id="theme-toggle" type="button" aria-label="切换明暗主题">深色模式</button>
@@ -913,14 +913,14 @@
             <div class="stat-note">checker + approval_gate</div>
           </div>
           <div class="stat-cell">
-            <div class="stat-num">15 / 25</div>
+            <div class="stat-num">15 / 26</div>
             <div class="stat-label">专项规则 / 自动技能</div>
             <div class="stat-note">仅 1 条规则具备 hook 强制</div>
           </div>
           <div class="stat-cell">
             <div class="stat-num">16 个脚本</div>
             <div class="stat-label">自动化治理工具链</div>
-            <div class="stat-note">AGENTS.md 占 12,531 B</div>
+            <div class="stat-note">AGENTS.md 占 12,623 B</div>
           </div>
         </div>
       </header>
@@ -1089,7 +1089,7 @@
                 </thead>
                 <tbody>
                   <tr><td><code>100</code></td><td><code>&lt;project-root&gt;/.dsh/skills</code></td><td>项目私有最高优先级（本仓未启用）</td></tr>
-                  <tr><td><code>200</code></td><td><code>&lt;project-root&gt;/.agents/skills</code></td><td>项目共享，<strong>本仓实际承载载体</strong>（25 个技能）</td></tr>
+                  <tr><td><code>200</code></td><td><code>&lt;project-root&gt;/.agents/skills</code></td><td>项目共享，<strong>本仓实际承载载体</strong>（26 个技能）</td></tr>
                   <tr><td><code>250</code></td><td>runtime provider</td><td>非文件系统根，运行时内存注册注入</td></tr>
                   <tr><td><code>300</code></td><td>custom dirs</td><td>用户配置自定义目录</td></tr>
                   <tr><td><code>400</code></td><td><code>${DSH_HOME}/skills</code></td><td>用户级，常为中央库符号链接（本机存在）</td></tr>
@@ -1133,7 +1133,7 @@
         <h2 id="h-sec-2" data-toc-level="1" data-toc-num="02" data-toc-label="规则体系、门禁与脚本拓扑">规则体系、门禁阈值与 16 个脚本调用拓扑</h2>
         <div class="prose">
           <p>
-            v2 架构将分散的 <code>modes/</code> 合并为自动发现技能 <code>task-modes</code>，收敛出 <strong>15 条专项规则</strong>与 <strong>25 个技能</strong>。<code>check_governance.py --strict</code> 执行 19 类静态检查，任一阻塞项即返回非零退出码。
+            v2 架构将分散的 <code>modes/</code> 合并为自动发现技能 <code>task-modes</code>，收敛出 <strong>15 条专项规则</strong>与 <strong>26 个技能</strong>。<code>check_governance.py --strict</code> 执行 19 类静态检查，任一阻塞项即返回非零退出码。
           </p>
         </div>
 
@@ -1334,7 +1334,7 @@
         </details>
 
         <details class="drawer">
-          <summary>自动发现技能目录（共 25 个 · 自动同步自 .agents/skills/）</summary>
+          <summary>自动发现技能目录（共 26 个 · 自动同步自 .agents/skills/）</summary>
           <div class="drawer-inner">
             <div class="skill-cols">
               <div class="skill-col">
@@ -1348,10 +1348,11 @@
               </div>
             </div>
             <div class="skill-col">
-              <h4>UI 与设计系统 <span class="count">14</span></h4>
+              <h4>UI 与设计系统 <span class="count">15</span></h4>
               <div class="skill-list">
                 <span class="skill-pill">accessibility-audit</span>
                 <span class="skill-pill">ai-slop-check</span>
+                <span class="skill-pill">claude-design</span>
                 <span class="skill-pill">component-extract</span>
                 <span class="skill-pill">design-system-extract</span>
                 <span class="skill-pill">frontend-aesthetic-direction</span>
@@ -1521,8 +1522,8 @@
                 <rect x="16" y="16" width="256" height="124" rx="4" fill="var(--svg-node)" stroke="var(--accent-secondary)"/>
                 <text x="34" y="46" fill="var(--accent-secondary)" font-size="16" font-weight="bold">1. 私有事实源</text>
                 <text x="34" y="74" fill="var(--ink-primary)" font-size="15.5">AGENTS + rules 01-15</text>
-                <text x="34" y="98" fill="var(--ink-secondary)" font-size="15">25 技能 · 19 项检查</text>
-                <text x="34" y="122" fill="var(--ink-muted)" font-size="14">HEAD: 4e5da27</text>
+                <text x="34" y="98" fill="var(--ink-secondary)" font-size="15">26 技能 · 19 项检查</text>
+                <text x="34" y="122" fill="var(--ink-muted)" font-size="14">HEAD: ddc34e8</text>
 
                 <path d="M 272 78 L 308 78" fill="none" stroke="var(--accent-primary)" stroke-width="1.6" marker-end="url(#d-arr)"/>
 
@@ -1659,15 +1660,15 @@
         <h3 id="h-7-budget" data-toc-level="2" data-toc-label="指令链字节预算占比">指令链字节预算占用实测</h3>
         <div class="budget-bar">
           <div class="budget-top">
-            <span>当前 <code>AGENTS.md</code> 体积：12,531 Bytes（121 行）</span>
-            <span>占单链 65,536 B 上限：19.1%</span>
+            <span>当前 <code>AGENTS.md</code> 体积：12,623 Bytes（121 行）</span>
+            <span>占单链 65,536 B 上限：19.3%</span>
           </div>
           <div class="budget-track">
-            <div class="budget-fill" style="width: 19.1%;"></div>
+            <div class="budget-fill" style="width: 19.3%;"></div>
           </div>
         </div>
 
-        <h3 id="h-7-source" data-toc-level="2" data-toc-label="AGENTS.md 渲染视图与源码"><code>AGENTS.md</code> 全文（实时同步自 rev 4e5da27）</h3>
+        <h3 id="h-7-source" data-toc-level="2" data-toc-label="AGENTS.md 渲染视图与源码"><code>AGENTS.md</code> 全文（实时同步自 rev ddc34e8）</h3>
         <div class="source-viewer" id="agents-viewer">
           <div class="source-head">
             <span>AGENTS.md</span>
@@ -1703,7 +1704,7 @@
 <ul class="md-list"><li>默认使用用户当前使用的语言；在此工作区未另有约定时，默认简体中文。代码、命令、路径和原始报错保留原样。</li><li>默认简洁、直接、专业；用户希望学习原理或明确要求详解时再展开教学说明。</li><li>日常回复去 AI 味：零寒暄、零捧场，第一句直入主题；一句话能说清的不强行分点或套用“<strong>小标题</strong>：说明”模板；用具体事实、路径和条件代替空洞形容词；说完结果、限制和待确认项即止，不用客服式邀请收尾。</li><li>用业务语言说明取舍，不把本可由 Agent 完成的分析推给用户；关键风险与证据缺口不能为了简短而省略。</li><li>决策卡片只用于确实需要用户拍板的分支、高风险操作或工作区规定的重大门禁；小任务不强制走完整卡片。</li><li>当用户缺乏相关背景、明确要求通俗解释，或需要作出复杂决策时，使用业务语言说明选项、成本、风险、验收依据与回退方式；不得仅凭提问方式推断用户缺乏专业能力。</li></ul>
 <div class="md-h md-h2">5. 专项规则索引</div>
 <p class="md-p">仅在任务适用时读取。运行时自动加载的只有两类：本文件（指令注入）与 <code>.agents/skills/</code> 目录（技能发现）。下列规则、模板与脚本不会被自动加载，需要时按路径主动读取。路径以当前工作区实际存在的文件为准。</p>
-<ul class="md-list"><li>架构、模块职责、精准差异：<code>.agents/rules/01-architecture-and-modularity.md</code>（读当：改结构/拆分模块/判断是否超出最小差异）</li><li>契约、测试、大改动前置计划与范围升级铁律：<code>.agents/rules/02-contract-and-testing.md</code>（读当：改契约/跑测试/大改动前/范围升级）</li><li>证伪验证、依赖真实性探针：<code>.agents/rules/03-hallucination-probes.md</code>（读当：引用依赖或结论需真实性核验）</li><li>复用、新依赖与供应链审查：<code>.agents/rules/04-reuse-and-supply-chain.md</code>（读当：新增依赖/复用既有实现/供应链审查）</li><li>决策/审批/交付卡片模板：<code>.agents/rules/05-pm-interaction-templates.md</code>（读当：需要决策卡片/审批/交付格式）</li><li>受限工作区的网络域名白名单（默认未启用，见规则 06 适用范围）：<code>.agents/rules/06-domain-whitelist.md</code>（读当：工作区启用白名单后需外网请求；本仓未启用，非必要不加载）</li><li>项目进度持久化、会话交接与长期记忆写入门禁：<code>.agents/rules/07-memory-bank-protocol.md</code>（读当：阶段交接/写进度账本/记忆入库）</li><li>多 Agent / 深度代理的调度与熔断：<code>.agents/rules/08-orchestration-and-multi-agent-guard.md</code>（读当：派子代理/多 Agent 并行/评审轮次控制）</li><li>UI 设计系统、布局高度预算与界面验收：<code>.agents/rules/09-ui-design-standard.md</code>（读当：做 UI 设计/改布局/界面验收）</li><li>外部参考项目、架构图与复盘工具：<code>.agents/rules/10-design-and-reference-tools.md</code>（读当：查参考项目/画架构图/复盘）</li><li>Notion 知识库镜像治理门禁（使用 Notion 的工作区）：<code>.agents/rules/11-notion-mirror-policy.md</code>（读当：要镜像/同步 Notion）</li><li>项目环境文档生命周期管理（持续管理环境信息的软件/工程项目）：<code>.agents/rules/12-project-environment-policy.md</code>（读当：增改 PROJECT_ENV 或环境事实）</li><li>全场景技能发现、能力评估与生命周期管理：<code>.agents/rules/13-skill-lifecycle-and-adaptation.md</code>（读当：发现能力缺口/检索安装技能）</li><li>Git 工作流与唯一写入口（提交/推送/分支/合并/标签）：<code>.agents/rules/14-git-workflow.md</code>（读当：任何 git 提交/推送/分支/合并/标签）</li><li>双 Agent 协同（模式矩阵、令牌环写锁、HUD 交接模板）：<code>.agents/rules/15-dual-agent-coop.md</code>（读当：收到 #mc/#ae/#tdd/#ss/#fix/#co 短码或要求双 Agent 协作）</li><li>高保真视觉风格参考库（非强制规则；UI 硬约束以规则 09 与项目 DESIGN.md 为准）：<code>docs/design/claude-design-system.md</code>（读当：需要高保真视觉参考）</li><li>大改动计划模板（由规则 02 引用）：<code>.agents/templates/task_plan_template.md</code>（读当：按规则 02 写大改动计划）</li><li>治理自检脚本（见 §7）：<code>.agents/scripts/check_governance.py</code>；辅助脚本 <code>.agents/scripts/skill_curator.py</code>（技能检索安装）、<code>.agents/scripts/gitingest_tool.py</code>（仓库摘要，需 <code>pip install -r .agents/scripts/requirements.txt</code>）（读当：改 .agents/ 或本文件后自检/检索安装技能/生成摘要）</li><li>治理层架构总图与断点清单：<code>docs/governance-map.md</code>（读当：查治理层结构与已知断点）</li><li>环境与治理执行台账：<code>docs/environment-todo.md</code>（读当：查环境/治理任务执行状态）</li><li>上游工单草案（非治理内容，仅归档）：<code>docs/plans/</code>（读当：查上游工单草案）</li><li>架构图发布脚本：<code>scripts/publish_diagram.py</code>（读当：发布架构图）</li><li>白皮书构建脚本：<code>scripts/build_whitepaper.py</code>（读当：重建架构白皮书）</li><li>工作区初始化与治理校验：<code>scripts/bootstrap_workspace.py</code>、<code>.agents/scripts/verify_governance.py</code>（读当：新工作区部署治理栈/核对门禁是否真的生效）；技能 <code>governance-init</code> 是其触发入口</li><li>项目环境事实（命令/端口/路径/已知坑/边界）：<code>PROJECT_ENV.md</code>（读当：进入工作区首轮或需要实际命令与端口时）</li><li>审批收据与评测证据：<code>.agents/approvals/</code>、<code>docs/audits/evals/</code>（读当：提交删除/依赖/受保护路径改动前，或需要评测状态）</li></ul>
+<ul class="md-list"><li>架构、模块职责、精准差异：<code>.agents/rules/01-architecture-and-modularity.md</code>（读当：改结构/拆分模块/判断是否超出最小差异）</li><li>契约、测试、大改动前置计划与范围升级铁律：<code>.agents/rules/02-contract-and-testing.md</code>（读当：改契约/跑测试/大改动前/范围升级）</li><li>证伪验证、依赖真实性探针：<code>.agents/rules/03-hallucination-probes.md</code>（读当：引用依赖或结论需真实性核验）</li><li>复用、新依赖与供应链审查：<code>.agents/rules/04-reuse-and-supply-chain.md</code>（读当：新增依赖/复用既有实现/供应链审查）</li><li>决策/审批/交付卡片模板：<code>.agents/rules/05-pm-interaction-templates.md</code>（读当：需要决策卡片/审批/交付格式）</li><li>受限工作区的网络域名白名单（默认未启用，见规则 06 适用范围）：<code>.agents/rules/06-domain-whitelist.md</code>（读当：工作区启用白名单后需外网请求；本仓未启用，非必要不加载）</li><li>项目进度持久化、会话交接与长期记忆写入门禁：<code>.agents/rules/07-memory-bank-protocol.md</code>（读当：阶段交接/写进度账本/记忆入库）</li><li>多 Agent / 深度代理的调度与熔断：<code>.agents/rules/08-orchestration-and-multi-agent-guard.md</code>（读当：派子代理/多 Agent 并行/评审轮次控制）</li><li>UI 设计系统、布局高度预算与界面验收：<code>.agents/rules/09-ui-design-standard.md</code>（读当：做 UI 设计/改布局/界面验收；凡样式/HTML/界面设计默认先读取全局 <code>claude-design</code> 技能再叠加本规则）</li><li>外部参考项目、架构图与复盘工具：<code>.agents/rules/10-design-and-reference-tools.md</code>（读当：查参考项目/画架构图/复盘）</li><li>Notion 知识库镜像治理门禁（使用 Notion 的工作区）：<code>.agents/rules/11-notion-mirror-policy.md</code>（读当：要镜像/同步 Notion）</li><li>项目环境文档生命周期管理（持续管理环境信息的软件/工程项目）：<code>.agents/rules/12-project-environment-policy.md</code>（读当：增改 PROJECT_ENV 或环境事实）</li><li>全场景技能发现、能力评估与生命周期管理：<code>.agents/rules/13-skill-lifecycle-and-adaptation.md</code>（读当：发现能力缺口/检索安装技能）</li><li>Git 工作流与唯一写入口（提交/推送/分支/合并/标签）：<code>.agents/rules/14-git-workflow.md</code>（读当：任何 git 提交/推送/分支/合并/标签）</li><li>双 Agent 协同（模式矩阵、令牌环写锁、HUD 交接模板）：<code>.agents/rules/15-dual-agent-coop.md</code>（读当：收到 #mc/#ae/#tdd/#ss/#fix/#co 短码或要求双 Agent 协作）</li><li>高保真视觉风格参考库（非强制规则；UI 硬约束以规则 09 与项目 DESIGN.md 为准）：<code>docs/design/claude-design-system.md</code>（读当：需要高保真视觉参考）</li><li>大改动计划模板（由规则 02 引用）：<code>.agents/templates/task_plan_template.md</code>（读当：按规则 02 写大改动计划）</li><li>治理自检脚本（见 §7）：<code>.agents/scripts/check_governance.py</code>；辅助脚本 <code>.agents/scripts/skill_curator.py</code>（技能检索安装）、<code>.agents/scripts/gitingest_tool.py</code>（仓库摘要，需 <code>pip install -r .agents/scripts/requirements.txt</code>）（读当：改 .agents/ 或本文件后自检/检索安装技能/生成摘要）</li><li>治理层架构总图与断点清单：<code>docs/governance-map.md</code>（读当：查治理层结构与已知断点）</li><li>环境与治理执行台账：<code>docs/environment-todo.md</code>（读当：查环境/治理任务执行状态）</li><li>上游工单草案（非治理内容，仅归档）：<code>docs/plans/</code>（读当：查上游工单草案）</li><li>架构图发布脚本：<code>scripts/publish_diagram.py</code>（读当：发布架构图）</li><li>白皮书构建脚本：<code>scripts/build_whitepaper.py</code>（读当：重建架构白皮书）</li><li>工作区初始化与治理校验：<code>scripts/bootstrap_workspace.py</code>、<code>.agents/scripts/verify_governance.py</code>（读当：新工作区部署治理栈/核对门禁是否真的生效）；技能 <code>governance-init</code> 是其触发入口</li><li>项目环境事实（命令/端口/路径/已知坑/边界）：<code>PROJECT_ENV.md</code>（读当：进入工作区首轮或需要实际命令与端口时）</li><li>审批收据与评测证据：<code>.agents/approvals/</code>、<code>docs/audits/evals/</code>（读当：提交删除/依赖/受保护路径改动前，或需要评测状态）</li></ul>
 <p class="md-p">项目特定资料（如 <code>PROJECT_ENV.md</code>、<code>PROGRESS.md</code>、<code>DECISIONS.md</code>、<code>DESIGN.md</code>）只有在当前工作区确实采用且文件存在时才适用。不得虚构缺失文档或声称读过不存在的文件。</p>
 <div class="md-h md-h2">6. 开发任务额外约束</div>
 <p class="md-p">只在实际涉及软件实现时适用：</p>
@@ -1794,7 +1795,7 @@
 - 受限工作区的网络域名白名单（默认未启用，见规则 06 适用范围）：`.agents/rules/06-domain-whitelist.md`（读当：工作区启用白名单后需外网请求；本仓未启用，非必要不加载）
 - 项目进度持久化、会话交接与长期记忆写入门禁：`.agents/rules/07-memory-bank-protocol.md`（读当：阶段交接/写进度账本/记忆入库）
 - 多 Agent / 深度代理的调度与熔断：`.agents/rules/08-orchestration-and-multi-agent-guard.md`（读当：派子代理/多 Agent 并行/评审轮次控制）
-- UI 设计系统、布局高度预算与界面验收：`.agents/rules/09-ui-design-standard.md`（读当：做 UI 设计/改布局/界面验收）
+- UI 设计系统、布局高度预算与界面验收：`.agents/rules/09-ui-design-standard.md`（读当：做 UI 设计/改布局/界面验收；凡样式/HTML/界面设计默认先读取全局 `claude-design` 技能再叠加本规则）
 - 外部参考项目、架构图与复盘工具：`.agents/rules/10-design-and-reference-tools.md`（读当：查参考项目/画架构图/复盘）
 - Notion 知识库镜像治理门禁（使用 Notion 的工作区）：`.agents/rules/11-notion-mirror-policy.md`（读当：要镜像/同步 Notion）
 - 项目环境文档生命周期管理（持续管理环境信息的软件/工程项目）：`.agents/rules/12-project-environment-policy.md`（读当：增改 PROJECT_ENV 或环境事实）
@@ -1839,7 +1840,7 @@
 
       <footer>
         <span>agent-framework-v2 · 治理架构工程白皮书</span>
-        <span>rev 4e5da27 · 生成于 2026-11-24 22:33</span>
+        <span>rev ddc34e8 · 生成于 2026-11-25 15:39</span>
       </footer>
     </main>
 
@@ -1850,8 +1851,8 @@
         <ul class="toc-groups" id="toc-groups"></ul>
       </nav>
       <div class="toc-footnote">
-        <div>构建基线: 4e5da27</div>
-        <div>生成时间: 2026-11-24 22:33</div>
+        <div>构建基线: ddc34e8</div>
+        <div>生成时间: 2026-11-25 15:39</div>
         <div>脚本数: 16 个工具</div>
       </div>
     </aside>

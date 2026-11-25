@@ -81,7 +81,7 @@
 - 受限工作区的网络域名白名单（默认未启用，见规则 06 适用范围）：`.agents/rules/06-domain-whitelist.md`（读当：工作区启用白名单后需外网请求；本仓未启用，非必要不加载）
 - 项目进度持久化、会话交接与长期记忆写入门禁：`.agents/rules/07-memory-bank-protocol.md`（读当：阶段交接/写进度账本/记忆入库）
 - 多 Agent / 深度代理的调度与熔断：`.agents/rules/08-orchestration-and-multi-agent-guard.md`（读当：派子代理/多 Agent 并行/评审轮次控制）
-- UI 设计系统、布局高度预算与界面验收：`.agents/rules/09-ui-design-standard.md`（读当：做 UI 设计/改布局/界面验收）
+- UI 设计系统、布局高度预算与界面验收：`.agents/rules/09-ui-design-standard.md`（读当：做 UI 设计/改布局/界面验收；凡样式/HTML/界面设计默认先读取全局 `claude-design` 技能再叠加本规则）
 - 外部参考项目、架构图与复盘工具：`.agents/rules/10-design-and-reference-tools.md`（读当：查参考项目/画架构图/复盘）
 - Notion 知识库镜像治理门禁（使用 Notion 的工作区）：`.agents/rules/11-notion-mirror-policy.md`（读当：要镜像/同步 Notion）
 - 项目环境文档生命周期管理（持续管理环境信息的软件/工程项目）：`.agents/rules/12-project-environment-policy.md`（读当：增改 PROJECT_ENV 或环境事实）

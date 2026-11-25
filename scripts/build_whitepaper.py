@@ -214,6 +214,7 @@ def collect_repo_data(repo_dir: str) -> dict:
 def categorize_skills(skills: list) -> dict:
     gov_keys = {"governance-init", "init", "init-agent", "init-gitvault", "task-modes"}
     ui_keys = {
+        "claude-design",
         "accessibility-audit", "ai-slop-check", "component-extract",
         "design-system-extract", "frontend-aesthetic-direction",
         "generate-variations", "hierarchy-rhythm-review",
