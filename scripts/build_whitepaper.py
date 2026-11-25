@@ -471,7 +471,7 @@ def render_html(data: dict) -> str:
       margin: 0 auto;
       padding: 48px 32px 96px;
       display: grid;
-      grid-template-columns: minmax(0, 1fr) 300px;
+      grid-template-columns: minmax(0, 1fr) 260px;
       gap: 56px;
     }}
 
@@ -491,7 +491,7 @@ def render_html(data: dict) -> str:
 
     .toc-caption {{
       font-family: var(--font-mono);
-      font-size: 13.5px;
+      font-size: 11.5px;
       text-transform: uppercase;
       letter-spacing: 0.08em;
       color: var(--ink-muted);
@@ -535,21 +535,21 @@ def render_html(data: dict) -> str:
     }}
 
     .toc-link.lvl-1 {{
-      font-size: 15px;
+      font-size: 13.5px;
       font-weight: 600;
       line-height: 1.45;
       color: var(--ink-primary);
     }}
 
     .toc-link.lvl-2 {{
-      font-size: 15px;
+      font-size: 12.5px;
       line-height: 1.4;
       padding: 4px 12px 4px 24px;
       color: var(--ink-secondary);
     }}
 
     .toc-link.lvl-3 {{
-      font-size: 13.5px;
+      font-size: 12px;
       line-height: 1.35;
       padding: 3px 12px 3px 38px;
       color: var(--ink-muted);
@@ -569,7 +569,7 @@ def render_html(data: dict) -> str:
 
     .toc-num {{
       font-family: var(--font-mono);
-      font-size: 14.5px;
+      font-size: 11.5px;
       color: var(--ink-muted);
       flex-shrink: 0;
     }}
@@ -581,7 +581,7 @@ def render_html(data: dict) -> str:
       padding-top: 14px;
       border-top: 1px solid var(--border-hairline);
       font-family: var(--font-mono);
-      font-size: 14.5px;
+      font-size: 12px;
       color: var(--ink-muted);
       line-height: 1.65;
     }}
