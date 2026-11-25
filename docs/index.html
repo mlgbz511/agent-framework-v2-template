@@ -167,6 +167,15 @@
       outline-offset: 2px;
     }
 
+    .btn-icon {
+      width: 34px;
+      height: 34px;
+      padding: 0;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
     .mobile-toc-btn { display: none; }
 
     /* Right-TOC Editorial Shell */
@@ -884,10 +893,10 @@
   <header class="masthead">
     <div class="masthead-left">
       <span class="masthead-brand">agent-framework-v2</span>
-      <span class="masthead-rev">rev a4c63b2</span>
+      <span class="masthead-rev">rev ded2207</span>
     </div>
     <div class="masthead-actions">
-      <button class="btn-ghost" id="theme-toggle" type="button" aria-label="切换明暗主题">深色模式</button>
+      <button class="btn-ghost btn-icon" id="theme-toggle" type="button" aria-label="切换深色模式" title="切换深色模式"></button>
       <button class="btn-ghost mobile-toc-btn" id="mobile-toc-toggle" type="button" aria-expanded="false">目录</button>
     </div>
   </header>
@@ -1523,7 +1532,7 @@
                 <text x="34" y="46" fill="var(--accent-secondary)" font-size="16" font-weight="bold">1. 私有事实源</text>
                 <text x="34" y="74" fill="var(--ink-primary)" font-size="15.5">AGENTS + rules 01-15</text>
                 <text x="34" y="98" fill="var(--ink-secondary)" font-size="15">26 技能 · 19 项检查</text>
-                <text x="34" y="122" fill="var(--ink-muted)" font-size="14">HEAD: a4c63b2</text>
+                <text x="34" y="122" fill="var(--ink-muted)" font-size="14">HEAD: ded2207</text>
 
                 <path d="M 272 78 L 308 78" fill="none" stroke="var(--accent-primary)" stroke-width="1.6" marker-end="url(#d-arr)"/>
 
@@ -1668,7 +1677,7 @@
           </div>
         </div>
 
-        <h3 id="h-7-source" data-toc-level="2" data-toc-label="AGENTS.md 渲染视图与源码"><code>AGENTS.md</code> 全文（实时同步自 rev a4c63b2）</h3>
+        <h3 id="h-7-source" data-toc-level="2" data-toc-label="AGENTS.md 渲染视图与源码"><code>AGENTS.md</code> 全文（实时同步自 rev ded2207）</h3>
         <div class="source-viewer" id="agents-viewer">
           <div class="source-head">
             <span>AGENTS.md</span>
@@ -1840,7 +1849,7 @@
 
       <footer>
         <span>agent-framework-v2 · 治理架构工程白皮书</span>
-        <span>rev a4c63b2 · 生成于 2026-11-25 15:45</span>
+        <span>rev ded2207 · 生成于 2026-11-25 16:23</span>
       </footer>
     </main>
 
@@ -1851,8 +1860,8 @@
         <ul class="toc-groups" id="toc-groups"></ul>
       </nav>
       <div class="toc-footnote">
-        <div>构建基线: a4c63b2</div>
-        <div>生成时间: 2026-11-25 15:45</div>
+        <div>构建基线: ded2207</div>
+        <div>生成时间: 2026-11-25 16:23</div>
         <div>脚本数: 16 个工具</div>
       </div>
     </aside>
@@ -1867,9 +1876,14 @@
       if (saved === 'dark' || saved === 'light') {
         root.setAttribute('data-theme', saved);
       }
+      const SUN_ICON = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>';
+      const MOON_ICON = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>';
       function syncThemeLabel() {
         const isDark = root.getAttribute('data-theme') === 'dark';
-        themeBtn.textContent = isDark ? '暖纸浅色' : '深色模式';
+        themeBtn.innerHTML = isDark ? SUN_ICON : MOON_ICON;
+        const label = isDark ? '切换暖纸浅色' : '切换深色模式';
+        themeBtn.setAttribute('aria-label', label);
+        themeBtn.setAttribute('title', label);
       }
       syncThemeLabel();
       themeBtn.addEventListener('click', () => {

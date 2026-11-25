@@ -463,6 +463,15 @@ def render_html(data: dict) -> str:
       outline-offset: 2px;
     }}
 
+    .btn-icon {{
+      width: 34px;
+      height: 34px;
+      padding: 0;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }}
+
     .mobile-toc-btn {{ display: none; }}
 
     /* Right-TOC Editorial Shell */
@@ -1183,7 +1192,7 @@ def render_html(data: dict) -> str:
       <span class="masthead-rev">rev {sha}</span>
     </div>
     <div class="masthead-actions">
-      <button class="btn-ghost" id="theme-toggle" type="button" aria-label="切换明暗主题">深色模式</button>
+      <button class="btn-ghost btn-icon" id="theme-toggle" type="button" aria-label="切换深色模式" title="切换深色模式"></button>
       <button class="btn-ghost mobile-toc-btn" id="mobile-toc-toggle" type="button" aria-expanded="false">目录</button>
     </div>
   </header>
@@ -1923,9 +1932,14 @@ def render_html(data: dict) -> str:
       if (saved === 'dark' || saved === 'light') {{
         root.setAttribute('data-theme', saved);
       }}
+      const SUN_ICON = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>';
+      const MOON_ICON = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>';
       function syncThemeLabel() {{
         const isDark = root.getAttribute('data-theme') === 'dark';
-        themeBtn.textContent = isDark ? '暖纸浅色' : '深色模式';
+        themeBtn.innerHTML = isDark ? SUN_ICON : MOON_ICON;
+        const label = isDark ? '切换暖纸浅色' : '切换深色模式';
+        themeBtn.setAttribute('aria-label', label);
+        themeBtn.setAttribute('title', label);
       }}
       syncThemeLabel();
       themeBtn.addEventListener('click', () => {{
